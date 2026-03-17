@@ -1,0 +1,80 @@
+[09-Mar-2026 21:56:09 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[09-Mar-2026 21:56:10 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[10-Mar-2026 10:01:50 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[10-Mar-2026 10:01:51 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:01:24 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:01:26 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:07:59 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:08:47 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:09:36 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:09:38 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:10:11 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:10:12 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:10:12 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:10:21 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:10:27 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:11:14 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[11-Mar-2026 16:47:37 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 11:48:37 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 11:48:38 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 11:48:40 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 11:51:50 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 11:51:51 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 11:51:53 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:33:42 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:33:48 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:33:48 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:33:54 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:34:09 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:34:09 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:34:18 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:34:18 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:34:47 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:36:27 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:36:28 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:36:46 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:37:11 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:37:11 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:37:18 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:37:19 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:43:31 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:43:34 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:43:36 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:43:40 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:47:54 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:48:16 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:48:35 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:48:38 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:48:39 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:48:43 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:54:05 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:54:09 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 15:54:10 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:00:20 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:00:25 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:00:26 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:00:30 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:38:21 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:38:24 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:38:40 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:38:46 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:38:46 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:44:46 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:44:49 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:45:20 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 16:45:57 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 17:00:29 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 17:00:54 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[12-Mar-2026 17:00:57 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[13-Mar-2026 10:44:36 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[13-Mar-2026 10:44:41 America/Argentina/Buenos_Aires] PHP Fatal error:  Cannot declare class App\Models\Customer, because the name is already in use in C:\xampp\htdocs\pets\app\Models\Old\Customer.php on line 8
+[15-Mar-2026 20:29:43 UTC] PHP Fatal error:  Uncaught Error: __VSCODE_LARAVEL_STARTUP_ERROR__: syntax error, unexpected token "default", expecting "]" in C:\xampp\htdocs\pets\vendor\_laravel_ide\discover-6d96201ad95cad12367117063c707ebf.php:33
+Stack trace:
+#0 C:\xampp\htdocs\pets\vendor\_laravel_ide\discover-6d96201ad95cad12367117063c707ebf.php(62): LaravelVsCode::startupError()
+#1 {main}
+  thrown in C:\xampp\htdocs\pets\vendor\_laravel_ide\discover-6d96201ad95cad12367117063c707ebf.php on line 33
+[15-Mar-2026 20:29:43 UTC] PHP Fatal error:  Uncaught Error: __VSCODE_LARAVEL_STARTUP_ERROR__: syntax error, unexpected token "default", expecting "]" in C:\xampp\htdocs\pets\vendor\_laravel_ide\discover-5802e590a92e23606bb54d2909564178.php:33
+Stack trace:
+#0 C:\xampp\htdocs\pets\vendor\_laravel_ide\discover-5802e590a92e23606bb54d2909564178.php(62): LaravelVsCode::startupError()
+#1 {main}
+  thrown in C:\xampp\htdocs\pets\vendor\_laravel_ide\discover-5802e590a92e23606bb54d2909564178.php on line 33
