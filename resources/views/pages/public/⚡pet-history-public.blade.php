@@ -24,7 +24,7 @@ new #[Layout('layouts.guest')] #[Title('Historial de Mascota')] class extends Co
         if ($veterinary->plan === 'pro') {
             $this->logo = $veterinary->profile?->logo;
             if (!$this->logo) {
-                $this->logo = asset('assets/logo-v.png');
+                $this->logo = asset('assets/logo.png');
             } else {
                 $this->logo = asset('storage/' . $this->logo);
             }
@@ -42,11 +42,15 @@ new #[Layout('layouts.guest')] #[Title('Historial de Mascota')] class extends Co
             'customer',
             'veterinary',
             'medicalRecords' => function ($query) {
-                $query->where('is_visible_to_owner', true)
-                      ->with(['type', 'files' => function($q) {
-                          $q->where('is_visible_to_owner', true);
-                      }])
-                      ->orderByDesc('performed_at');
+                $query
+                    ->where('is_visible_to_owner', true)
+                    ->with([
+                        'type',
+                        'files' => function ($q) {
+                            $q->where('is_visible_to_owner', true);
+                        },
+                    ])
+                    ->orderByDesc('performed_at');
             },
         ]);
     }
@@ -390,12 +394,16 @@ new #[Layout('layouts.guest')] #[Title('Historial de Mascota')] class extends Co
                                         </div>
                                     @endif
 
-                                    @if($record->files->isNotEmpty())
+                                    @if ($record->files->isNotEmpty())
                                         <div class="mt-4 pt-4 border-t border-stone-100 flex flex-wrap gap-2">
-                                            @foreach($record->files as $file)
-                                                <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-50 border border-stone-200 text-stone-600 rounded-lg text-xs font-semibold hover:bg-stone-100 hover:text-teal-600 transition-colors">
-                                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                                            @foreach ($record->files as $file)
+                                                <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank"
+                                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-50 border border-stone-200 text-stone-600 rounded-lg text-xs font-semibold hover:bg-stone-100 hover:text-teal-600 transition-colors">
+                                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
                                                     </svg>
                                                     {{ Str::limit($file->original_name, 20) }}
                                                 </a>

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>PetClinic - Sistema para Veterinarias</title>
+    <title>CumbreVets - Sistema para Veterinarias</title>
 
     <link rel="icon" href="/favicon.ico" sizes="any">
 
@@ -26,10 +26,10 @@
 
             <div class="flex items-center gap-2">
 
-                <img src="{{ asset('assets/logo-v.png') }}" class="h-10 rounded-lg">
+                <img src="{{ asset('assets/logo.png') }}" class="h-10 rounded-lg">
 
                 <span class="text-xl font-black tracking-tight">
-                    Pet<span class="text-emerald-500">Clinic</span>
+                    Cumbre<span class="text-emerald-500">Vets</span>
                 </span>
 
             </div>
@@ -263,17 +263,17 @@
 
             <div class="flex items-center gap-2">
 
-                <img src="{{ asset('assets/logo-v.png') }}" class="h-8">
+                <img src="{{ asset('assets/logo.png') }}" class="h-8">
 
                 <span class="font-bold">
-                    Pet<span class="text-emerald-500">Clinic</span>
+                    Cumbre<span class="text-emerald-500">Vets</span>
                 </span>
 
             </div>
 
             <div class="text-gray-500 text-sm">
 
-                © {{ date('Y') }} PetClinic
+                © {{ date('Y') }} CumbreVets
 
             </div>
 

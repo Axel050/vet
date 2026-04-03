@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('file_name');
             $table->string('original_name');
             $table->string('type')->nullable();
+            $table->boolean('is_visible_to_owner')->default(false);
 
             $table->timestamps();
         });

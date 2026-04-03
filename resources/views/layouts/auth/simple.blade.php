@@ -19,14 +19,17 @@
             <!-- Logo Section -->
             <div class="flex flex-col items-center mb-4 space-y-3">
 
-                <div class="relative">
-                    <img src="{{ asset('assets/logo-v.png') }}"
+                <div class="relative flex flex-col items-center ">
+                    <img src="{{ asset('assets/logo.png') }}"
                         class="h-24 object-contain drop-shadow-[0_0_30px_rgba(16,185,129,0.4)]" alt="CumbrePets">
+
+
                 </div>
 
                 <h1 class="text-2xl font-semibold tracking-wide text-gray-800">
-                    Bienvenido
+                    Bienvenido a Cumbre<span class="text-emerald-500">Vets</span>
                 </h1>
+
 
                 <p class="text-sm text-gray-500 text-center max-w-xs">
                     Plataforma moderna para la gestión de clínicas veterinarias

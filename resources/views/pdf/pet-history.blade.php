@@ -122,7 +122,7 @@
 <body>
     <div class="header">
         <div style="margin-bottom: 20px;">
-            <img src="{{ public_path('assets/logo-v.png') }}" style="height: 80px; width: auto;" alt="Logo">
+            <img src="{{ public_path('assets/logo.png') }}" style="height: 80px; width: auto;" alt="Logo">
         </div>
         <h1 class="workshop-name">{{ $veterinary->name }}</h1>
         <p class="subtitle">Historial de Atención</p>
