@@ -134,6 +134,7 @@ class PetForm extends Form
             'birth_year.max' => 'El año no puede ser futuro',
             'photo.image' => 'El archivo debe ser una imagen.',
             'photo.max' => 'La foto no debe pesar más de 2MB.',
+            'photo.dimensions' => 'La foto debe tener una resolución mínima de 100x100 píxeles y máxima de 4000x4000 píxeles.',
         ];
     }
 
@@ -213,7 +214,7 @@ class PetForm extends Form
 
     private function handleSpeciesAndBreedRequests(?int $speciesId, ?int $breedId): void
     {
-        if ($speciesId === null && $this->specie_custom) {
+        if ($speciesId === null && $this->specie_custom && ! $this->breed_custom) {
 
             SpeciesRequest::firstOrCreate([
                 'name' => trim($this->specie_custom),
@@ -268,5 +269,16 @@ class PetForm extends Form
                 'status' => 'pending',
             ]);
         }
+    }
+
+    public function removePhoto(): void
+    {
+        if ($this->pet && $this->pet->photo_path) {
+            if (Storage::disk('public')->exists($this->pet->photo_path)) {
+                Storage::disk('public')->delete($this->pet->photo_path);
+            }
+            $this->pet->update(['photo_path' => null]);
+        }
+        $this->reset('photo');
     }
 }

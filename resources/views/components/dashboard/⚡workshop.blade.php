@@ -7,12 +7,22 @@ use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 new class extends Component {
+    public $range = '30_days';
+    public $startDate;
+    public $endDate;
+    public $range_label = 'Últimos 30 días';
+    public bool $isPro = false;
+
     public function mount()
     {
         $user = auth()->user();
         if ($user->veterinary) {
             $user->veterinary->syncSubscriptionStatus();
         }
+
+        $this->isPro = Auth::user()->veterinary->plan === 'pro';
+
+        $this->resolveDates();
     }
 
     #[Computed]
@@ -40,6 +50,152 @@ new class extends Component {
             ->veterinary->medicalRecords()
             ->where('performed_at', '>=', now()->startOfMonth())
             ->sum('price');
+    }
+
+    protected function resolveDates(): void
+    {
+        if (!$this->isPro) {
+            return;
+        }
+
+        switch ($this->range) {
+            case '7_days':
+                $this->startDate = now()->subDays(7);
+                break;
+
+            case '30_days':
+                $this->startDate = now()->subDays(30);
+                break;
+
+            case 'this_month':
+                $this->startDate = now()->startOfMonth();
+                break;
+            case 'this_year':
+                $this->startDate = now()->startOfYear();
+                break;
+        }
+
+        $this->endDate = now();
+    }
+
+    public function updatedRange()
+    {
+        if (!$this->isPro) {
+            return;
+        }
+
+        $this->resolveDates();
+
+        switch ($this->range) {
+            case '7_days':
+                $this->range_label = 'Últimos 7 días';
+                break;
+
+            case '30_days':
+                $this->range_label = 'Últimos 30 días';
+                break;
+
+            case 'this_month':
+                $this->range_label = 'Este mes';
+                break;
+            case 'this_year':
+                $this->range_label = 'Este año';
+                break;
+        }
+
+        $this->dispatch('update-chart', [
+            'type' => $this->incomeByType(),
+            'species' => $this->incomeBySpecies(),
+        ]);
+    }
+
+    #[Computed]
+    public function incomeByType()
+    {
+        if (!$this->isPro) {
+            return;
+        }
+
+        $records = \App\Models\MedicalRecord::where('veterinary_id', auth()->user()->veterinary_id)
+            ->whereBetween('performed_at', [$this->startDate, $this->endDate])
+            ->where('price', '>', 0)
+            ->selectRaw('veterinary_type_id, sum(price) as total')
+            ->groupBy('veterinary_type_id')
+            ->with('type')
+            ->get();
+
+        $labels = [];
+        $data = [];
+        $colors = ['#6366f1', '#a855f7', '#ec4899', '#3b82f6', '#14b8a6', '#f59e0b', '#ef4444', '#10b981', '#64748b'];
+
+        foreach ($records as $record) {
+            $labels[] = $record->type ? $record->type->name : 'General/Otro';
+            $data[] = (float) $record->total;
+        }
+
+        if (empty($labels)) {
+            return [
+                'labels' => ['Sin Ingresos'],
+                'data' => [0],
+                'colors' => ['#374151'],
+            ];
+        }
+
+        return [
+            'labels' => $labels,
+            'data' => $data,
+            'colors' => array_slice($colors, 0, count($labels)),
+        ];
+    }
+
+    #[Computed]
+    public function incomeBySpecies()
+    {
+        if (!$this->isPro) {
+            return;
+        }
+
+        $records = MedicalRecord::with('pet.species')
+            ->where('veterinary_id', auth()->user()->veterinary_id)
+            ->where('price', '>', 0)
+            ->whereBetween('performed_at', [$this->startDate, $this->endDate])
+            ->get();
+
+        $grouped = [];
+        foreach ($records as $record) {
+            $speciesName = 'Otro';
+            if ($record->pet) {
+                if ($record->pet->species) {
+                    $speciesName = $record->pet->species->name;
+                } elseif ($record->pet->specie_custom) {
+                    $speciesName = $record->pet->specie_custom;
+                }
+            }
+
+            if (!isset($grouped[$speciesName])) {
+                $grouped[$speciesName] = 0;
+            }
+            $grouped[$speciesName] += (float) $record->price;
+        }
+
+        $labels = array_keys($grouped);
+        $data = array_values($grouped);
+
+        $colors = ['#10b981', '#f59e0b', '#3b82f6', '#8b5cf6', '#ec4899', '#ef4444', '#6b7280'];
+
+        if (empty($labels)) {
+            return [
+                'labels' => ['Sin Ingresos'],
+                'data' => [0],
+                'colors' => ['#374151'],
+            ];
+        }
+
+        return [
+            'labels' => $labels,
+            'data' => $data,
+            'colors' => array_slice($colors, 0, count($labels)),
+        ];
     }
 };
 ?>
@@ -193,6 +349,67 @@ new class extends Component {
     @endif
 
     @if ($veterinary && $veterinary->subscription_status !== SubscriptionStatus::CANCELLED)
+
+        @if ($isPro)
+            <!-- Dashboard Charts -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:mb-6 mb-4 mt-2">
+
+                <div class="flex justify-start col-span-1 md:col-span-2">
+                    <h3 class="md:text-lg text-sm font-semibold text-white flex items-center md:gap-2 gap-1">
+                        <svg class="h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 7a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V7zM16 3v4M8 3v4M4 11h16" />
+                        </svg>
+                        Rango de dias
+                    </h3>
+
+                    <select name="range" id="range" wire:model.live="range"
+                        class="bg-gray-800 text-white rounded-lg px-2 py-1 ml-2">
+                        <option value="7_days">Últimos 7 días</option>
+                        <option value="30_days">Últimos 30 días</option>
+                        <option value="this_year">Este año</option>
+                        <option value="this_month">Este mes</option>
+                    </select>
+                </div>
+
+                <!-- Pie Chart -->
+                <div class="bg-gray-800 rounded-xl border border-gray-700 shadow-lg md:p-6 p-4">
+
+                    <div class="flex justify-between items-center md:mb-4 mb-2">
+                        <h3 class="text-sm font-semibold text-gray-300  flex justify-between items-center">
+                            Ingresos por Tipo
+                        </h3>
+
+                        <span class="text-xs bg-indigo-500/20 text-indigo-400 px-2 py-1 rounded">
+                            {{ $range_label }}
+                        </span>
+                    </div>
+
+
+                    {{-- <x-charts.doughnut-chart :data="$this->incomeByType()" chart="type" /> --}}
+                    <x-charts.bar-chart :data="$this->incomeByType()" chart="type" />
+
+
+                </div>
+
+                <!-- Pie Chart Species -->
+                <div class="bg-gray-800 rounded-xl border border-gray-700 shadow-lg md:p-6 p-4">
+                    <div class="flex justify-between items-center md:mb-4 mb-2">
+                        <h3 class="text-sm font-semibold text-gray-300  flex justify-between items-center">
+                            Ingresos por Especies
+                        </h3>
+                        <span class="text-xs bg-indigo-500/20 text-indigo-400 px-2 py-1 rounded">
+                            {{ $range_label }}
+                        </span>
+
+                    </div>
+
+
+                    <x-charts.doughnut-chart :data="$this->incomeBySpecies()" chart="species" />
+                </div>
+            </div>
+        @endif
 
         <!-- Recent Activity & Subscription -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">

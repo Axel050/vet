@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
 
             $table->foreignId('species_id')->nullable();
+            $table->string('specie_custom')->nullable();
             $table->foreignId('breed_id')->nullable();
+            $table->string('breed_custom')->nullable();
 
             $table->string('name');
             $table->year('birth_year')->nullable();
@@ -35,8 +37,7 @@ return new class extends Migration
             $table->string('photo_path')->nullable();
             $table->string('blood_type')->nullable();
 
-            $table->string('specie_custom')->nullable();
-            $table->string('breed_custom')->nullable();
+            $table->softDeletes();
 
             $table->unique(['veterinary_id', 'name', 'customer_id']);
             $table->timestamps();

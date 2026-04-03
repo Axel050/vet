@@ -36,4 +36,26 @@ class UserFactory extends Factory
             'veterinary_id' => null,
         ]);
     }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     */
+    public function unverified(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Indicate that the user has two-factor authentication configured.
+     */
+    public function withTwoFactor(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'two_factor_secret' => encrypt('secret'),
+            'two_factor_recovery_codes' => encrypt(json_encode(['recovery-code-1', 'recovery-code-2'])),
+            'two_factor_confirmed_at' => now(),
+        ]);
+    }
 }

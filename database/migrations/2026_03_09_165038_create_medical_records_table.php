@@ -43,6 +43,8 @@ return new class extends Migration
             $table->date('next_appointment_at')->nullable();
             $table->boolean('is_visible_to_owner')->default(true);
 
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

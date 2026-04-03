@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Forms;
 
+use App\Actions\CreateDefaultTypes;
+use App\Enums\SubscriptionStatus;
 use App\Models\User;
 use App\Models\Veterinary;
 use App\Models\VeterinaryProfile;
-use App\Enums\SubscriptionStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -17,25 +18,33 @@ class VeterinaryForm extends Form
 
     // Veterinaria Fields
     public string $businessName = '';
+
     public string $plan = 'free';
-    public $subscriptionStatus = 'trial'; 
+
+    public $subscriptionStatus = 'trial';
+
     public string $slug = '';
 
     // User (Owner) Fields
     public string $name = '';
+
     public string $email = '';
+
     public string $password = '';
 
     // Profile Fields
     public string $address = '';
+
     public string $phone = '';
+
     public string $trialEndsAt = '';
+
     public string $subscriptionEndsAt = '';
 
     public function setVeterinary(Veterinary $veterinary): void
     {
         $this->veterinary = $veterinary;
-        
+
         $this->businessName = $veterinary->name ?? '';
         $this->plan = $veterinary->plan ?? 'free';
         $this->subscriptionStatus = $veterinary->subscription_status?->value ?? 'trial';
@@ -147,6 +156,10 @@ class VeterinaryForm extends Form
                 'address' => $this->address,
                 'phone' => $this->phone,
             ]);
+
+            if (! $veterinary->types()->exists()) {
+                CreateDefaultTypes::handle($veterinary);
+            }
         });
 
         $this->reset();

@@ -62,6 +62,35 @@ new #[Title('Catálogo de Servicios')] class extends Component {
             ->where('veterinary_id', Auth::user()->veterinary_id)
             ->firstOrFail();
 
+        $hasRecords = $type->medicalRecords()->withTrashed()->exists();
+
+        if ($hasRecords) {
+            $type->update([
+                'is_active' => false,
+            ]);
+
+            $message = 'El tipo fue desactivado porque tiene historial asociado';
+            $event = 'type-deactivated';
+        } else {
+            $type->delete();
+
+            $message = 'Tipo eliminado correctamente';
+            $event = 'type-deleted';
+        }
+
+        $this->confirmingDeletion = false;
+        $this->typeIdDeletion = null;
+
+        $this->dispatch('notify', message: $message, type: 'success');
+        $this->dispatch($event);
+    }
+
+    public function delete2(): void
+    {
+        $type = VeterinaryType::where('id', $this->typeIdDeletion)
+            ->where('veterinary_id', Auth::user()->veterinary_id)
+            ->firstOrFail();
+
         $type->delete();
 
         $this->confirmingDeletion = false;
@@ -202,9 +231,9 @@ new #[Title('Catálogo de Servicios')] class extends Component {
         </x-slot>
 
         <x-slot name="content">
-            ¿Estás seguro de que deseas eliminar este tipo de consulta del catálogo? Los registros históricos que ya
-            utilicen
-            este tipo no se verán afectados, pero ya no podrás elegirlo para nuevos registros.
+            ¿Estás seguro de que deseas eliminar este tipo de consulta del catálogo? Si el tipo ya se encuentra en uso
+            en
+            algún registro, no se podrá eliminar, solo se desactivará.
         </x-slot>
     </x-confirmation-modal>
 </div>

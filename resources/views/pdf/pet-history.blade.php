@@ -134,7 +134,7 @@
                 <span class="label">Mascota</span>
                 <span class="value">{{ $pet->name }}</span>
                 <div style="font-size: 13px; color: #666;">
-                    {{ $pet->species?->name }} {{ $pet->breed?->name }} ({{ $pet->birth_year }})
+                    {{ $pet->specie_name }} {{ $pet->breed_name }} ({{ $pet->birth_year }})
                 </div>
             </td>
             <td class="info-cell">

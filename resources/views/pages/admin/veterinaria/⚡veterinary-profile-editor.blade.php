@@ -81,6 +81,18 @@ new #[Title('Editor de Perfil')] class extends Component {
 
         $this->loadSocialLinks();
     }
+
+    public function removeCoverImage()
+    {
+        $this->form->removeCoverImage();
+        $this->dispatch('notify', message: 'Imagen de portada eliminada', type: 'success');
+    }
+
+    public function removeLogo()
+    {
+        $this->form->removeLogo();
+        $this->dispatch('notify', message: 'Logo eliminado', type: 'success');
+    }
 };
 
 ?>
@@ -148,8 +160,17 @@ new #[Title('Editor de Perfil')] class extends Component {
                                     </svg>
                                 </div>
                             @endif
-                            <input type="file" wire:model="form.cover_image"
-                                class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-gray-700 file:text-gray-300 hover:file:bg-gray-600 cursor-pointer">
+                            <div class="flex flex-col gap-2">
+                                <input type="file" wire:model="form.cover_image"
+                                    class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-gray-700 file:text-gray-300 hover:file:bg-gray-600 cursor-pointer">
+                                
+                                @if ($form->cover_image || $form->profile?->cover_image)
+                                    <button type="button" wire:click="removeCoverImage"
+                                        class="text-xs text-red-500 hover:text-red-400 font-medium text-left w-fit">
+                                        Eliminar imagen
+                                    </button>
+                                @endif
+                            </div>
 
                         </div>
                         @error('form.cover_image')
@@ -160,13 +181,21 @@ new #[Title('Editor de Perfil')] class extends Component {
             </div>
 
             <!-- Description -->
-            <div class="bg-gray-800 rounded-2xl border border-gray-700 shadow-xl overflow-hidden">
+            <div class="bg-gray-800 rounded-2xl border border-gray-700 shadow-xl overflow-hidden ">
+
                 <div class="md:p-6 p-3 border-b border-gray-700">
                     <h3 class="text-lg font-semibold text-white">Sobre Nosotros</h3>
                 </div>
-                <div class="md:p-6 p-3">
-                    <x-textarea label="Descripción Detallada" model="form.description"
-                        placeholder="Cuéntale a tus clientes por qué deberían elegirte..." rows="6" />
+
+                <div class="flex md:flex-row flex-col ">
+                    <div class="md:p-6 p-3">
+                        <x-input label="Años en el mercado" model="form.years_in_business" type="number" min="0"
+                            placeholder="Ej: 5" />
+                    </div>
+                    <div class="md:p-6 p-3 flex-1">
+                        <x-textarea label="Descripción Detallada" model="form.description"
+                            placeholder="Cuéntale a tus clientes por qué deberían elegirte..." rows="6" />
+                    </div>
                 </div>
             </div>
 
@@ -195,11 +224,20 @@ new #[Title('Editor de Perfil')] class extends Component {
                                 <span class="text-[10px] text-gray-600 uppercase font-bold">Logo</span>
                             </div>
                         @endif
-                        <div>
-                            <label class="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">Logo
-                                de la Veterinaria</label>
-                            <input type="file" wire:model="form.logo"
-                                class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-gray-700 file:text-gray-300 hover:file:bg-gray-600 cursor-pointer">
+                        <div class="flex flex-col gap-2">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">Logo
+                                    de la Veterinaria</label>
+                                <input type="file" wire:model="form.logo"
+                                    class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-gray-700 file:text-gray-300 hover:file:bg-gray-600 cursor-pointer">
+                            </div>
+
+                            @if ($form->logo || $form->profile?->logo)
+                                <button type="button" wire:click="removeLogo"
+                                    class="text-xs text-red-500 hover:text-red-400 font-medium text-left w-fit mt-1">
+                                    Eliminar logo
+                                </button>
+                            @endif
                         </div>
                     </div>
                     @error('form.logo')

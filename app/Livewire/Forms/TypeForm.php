@@ -49,10 +49,10 @@ class TypeForm extends Form
         ];
     }
 
-    public function store(): void
+    public function store(): VeterinaryType
     {
 
-        VeterinaryType::create([
+        $type = VeterinaryType::create([
             'veterinary_id' => auth()->user()->veterinary_id,
             'name' => $this->name,
             'description' => $this->description,
@@ -62,6 +62,8 @@ class TypeForm extends Form
         ]);
 
         $this->reset();
+
+        return $type;
     }
 
     public function update(): void

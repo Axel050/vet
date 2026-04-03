@@ -91,6 +91,10 @@ new class extends Component {
             ->where('veterinary_id', Auth::user()->veterinary_id)
             ->firstOrFail();
 
+        if ($pet->photo_path && Storage::disk('public')->exists($pet->photo_path)) {
+            Storage::disk('public')->delete($pet->photo_path);
+        }
+
         $pet->delete();
 
         $this->confirmingDeletion = false;
@@ -98,6 +102,13 @@ new class extends Component {
 
         $this->dispatch('notify', message: 'Mascota eliminada correctamente', type: 'success');
         $this->dispatch('pet-deleted');
+    }
+
+    public function removePhoto(): void
+    {
+        $this->form->removePhoto();
+        $this->dispatch('notify', message: 'Foto eliminada correctamente', type: 'success');
+        $this->dispatch('pet-updated');
     }
 };
 ?>
@@ -201,15 +212,26 @@ new class extends Component {
                     </div>
 
                     <div class="md:col-span-3 flex items-center gap-4 md:justify-start justify-between">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-400 mb-1 uppercase tracking-wider">Foto de
-                                la
-                                Mascota</label>
-                            <input type="file" wire:model="form.photo"
-                                class="w-full text-sm text-gray-400 file:mr-4 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 transition-all cursor-pointer" />
-                            @error('form.photo')
-                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
-                            @enderror
+                        <div class="flex flex-col gap-2 w-full">
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-gray-400 mb-1 uppercase tracking-wider">Foto
+                                    de
+                                    la
+                                    Mascota</label>
+                                <input type="file" wire:model="form.photo"
+                                    class="w-full text-sm text-gray-400 file:mr-4 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 transition-all cursor-pointer"
+                                    accept="image/png, image/jpeg, image/jpg, image/webp" />
+                                @error('form.photo')
+                                    <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            @if ($form->photo || ($form->pet && $form->pet->photo_path))
+                                <button type="button" wire:click="removePhoto"
+                                    class="text-xs text-red-500 hover:text-red-400 font-medium text-left w-fit mt-1">
+                                    Eliminar foto
+                                </button>
+                            @endif
                         </div>
 
                         <div class="size-16 rounded-xl overflow-hidden bg-gray-950 border border-gray-700 shrink-0">
@@ -265,7 +287,7 @@ new class extends Component {
                             @foreach ($customerToEdit->pets as $pet)
                                 <tr wire:key="pet-{{ $pet->id }}" class="divide-x divide-gray-600">
                                     <td class="px-4 py-3 text-sm text-white">
-                                        {{ $pet->species?->name }} {{ $pet->breed?->name }}
+                                        {{ $pet->specie_name }} {{ $pet->breed_name }}
                                     </td>
                                     <td class="px-4 py-3 text-sm text-gray-300 font-medium">{{ $pet->name }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-300">

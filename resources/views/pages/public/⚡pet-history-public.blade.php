@@ -42,7 +42,11 @@ new #[Layout('layouts.guest')] #[Title('Historial de Mascota')] class extends Co
             'customer',
             'veterinary',
             'medicalRecords' => function ($query) {
-                $query->where('is_visible_to_owner', true)->with('type')->orderByDesc('performed_at');
+                $query->where('is_visible_to_owner', true)
+                      ->with(['type', 'files' => function($q) {
+                          $q->where('is_visible_to_owner', true);
+                      }])
+                      ->orderByDesc('performed_at');
             },
         ]);
     }
@@ -193,8 +197,8 @@ new #[Layout('layouts.guest')] #[Title('Historial de Mascota')] class extends Co
                                 <h2 class="md:text-3xl text-2xl font-extrabold text-stone-800 tracking-tight">
                                     {{ $pet->name }}
                                 </h2>
-                                <p class="text-stone-500 font-medium">{{ $pet->species?->name }} •
-                                    {{ $pet->breed?->name }}</p>
+                                <p class="text-stone-500 font-medium">{{ $pet->specie_name }} •
+                                    {{ $pet->breed_name }}</p>
                                 <div class="flex items-center gap-2 mt-1">
                                     <span
                                         class="inline-flex items-center md:px-2.5 px-1.5 py-0.5 rounded-full text-xs font-bold bg-teal-50 text-teal-700 uppercase tracking-tight border border-teal-100">
@@ -385,6 +389,19 @@ new #[Layout('layouts.guest')] #[Title('Historial de Mascota')] class extends Co
                                                 {{ $record->recommendations }}</p>
                                         </div>
                                     @endif
+
+                                    @if($record->files->isNotEmpty())
+                                        <div class="mt-4 pt-4 border-t border-stone-100 flex flex-wrap gap-2">
+                                            @foreach($record->files as $file)
+                                                <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-50 border border-stone-200 text-stone-600 rounded-lg text-xs font-semibold hover:bg-stone-100 hover:text-teal-600 transition-colors">
+                                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                                                    </svg>
+                                                    {{ Str::limit($file->original_name, 20) }}
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </article>
@@ -416,7 +433,8 @@ new #[Layout('layouts.guest')] #[Title('Historial de Mascota')] class extends Co
                 </p>
                 <p class="text-stone-400 text-sm font-medium">
                     Desarrollado por <a href="https://www.cumbreit.com.ar" target="_blank"
-                        class="text-stone-700">Cumbre<span class="text-teal-600">IT</span></a>
+                        class="text-stone-700 hover:font-bold hover:underline">Cumbre<span
+                            class="text-teal-600">IT</span></a>
                 </p>
             </div>
         </footer>

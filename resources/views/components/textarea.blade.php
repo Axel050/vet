@@ -2,7 +2,7 @@
 
 
 <div>
-    <label class="block text-sm font-medium text-gray-300 mb-2">
+    <label class="block text-sm font-medium text-gray-300 mb-1">
         {{ $label }}
     </label>
 
@@ -10,7 +10,7 @@
         {{ $disabled ? 'disabled' : '' }}
         {{ $attributes->merge([
             'class' =>
-                'w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 text-white ',
+                'w-full px-4 md:py-1.5 py-1 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 text-white ',
         ]) }}></textarea>
 
     @error($model)

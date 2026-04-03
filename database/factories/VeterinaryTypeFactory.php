@@ -22,7 +22,8 @@ class VeterinaryTypeFactory extends Factory
                 'Laboratorio',
             ]),
             'description' => fake()->sentence(),
-            'price' => fake()->randomFloat(2, 500, 5000),
+            'icon' => null,
+            'show_in_landing' => true,
             'is_active' => true,
         ];
     }

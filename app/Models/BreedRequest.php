@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Database\Factories\BreedRequestFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BreedRequest extends Model
 {
-    /** @use HasFactory<\Database\Factories\BreedRequestFactory> */
+    /** @use HasFactory<BreedRequestFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -32,5 +33,10 @@ class BreedRequest extends Model
     public function species()
     {
         return $this->belongsTo(Species::class);
+    }
+
+    public function getSpecieNameAttribute()
+    {
+        return $this->species?->name ?? $this->custom_species;
     }
 }

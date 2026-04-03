@@ -38,7 +38,7 @@ new class extends Component {
 
     public function save()
     {
-        Gate::authorize('manage-veterinary');
+        // Gate::authorize('manage-veterinary');
 
         $this->validate([
             'amount' => 'required|numeric|min:1',
@@ -153,7 +153,7 @@ new class extends Component {
             <tbody class="divide-y divide-gray-800">
                 @forelse($veterinary->payments()->orderByDesc('payment_date')->get() as $payment)
                     <tr class="text-sm [&>td]:md:py-3 [&>td]:py-2 [&>td]:md:px-4 [&>td]:px-2">
-                        <td class="text-white">{{ $payment->payment_date->format('d/m/y') }}</td>
+                        <td class="text-white">{{ $payment->payment_date }}</td>
                         <td class="text-green-400 font-bold">
                             ${{ number_format($payment->amount, 0, ',', '.') }}</td>
                         <td class="text-gray-300">{{ $payment->payment_method }}</td>

@@ -147,6 +147,8 @@ new #[Layout('layouts.guest')] #[Title('Veterinaria')] class extends Component {
             <div class="absolute inset-0">
                 <img src="{{ asset('storage/' . $profile->cover_image) }}" class="w-full h-full object-cover opacity-45">
             </div>
+        @else
+            <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-100"></div>
         @endif
 
         <div class="absolute inset-0 bg-white/80"></div>
@@ -311,7 +313,7 @@ new #[Layout('layouts.guest')] #[Title('Veterinaria')] class extends Component {
 
         <div class="max-w-6xl mx-auto px-6">
 
-            <div class="grid md:grid-cols-3 text-center gap-8">
+            <div class="flex justify-center  md:flex-row flex-col items-center md:gap-30 gap-8">
 
                 <div>
                     <h3 class="text-4xl font-black text-emerald-500">+1200</h3>
@@ -323,10 +325,12 @@ new #[Layout('layouts.guest')] #[Title('Veterinaria')] class extends Component {
                     <p class="text-gray-500 mt-2">Clientes felices</p>
                 </div>
 
-                <div>
-                    <h3 class="text-4xl font-black text-teal-500">10+</h3>
-                    <p class="text-gray-500 mt-2">Años de experiencia</p>
-                </div>
+                @if ($profile->years_in_business)
+                    <div class="text-center">
+                        <h3 class="text-4xl font-black text-teal-500">+{{ $profile->years_in_business }}</h3>
+                        <p class="text-gray-500 mt-2">Años de experiencia</p>
+                    </div>
+                @endif
 
             </div>
         </div>
@@ -374,10 +378,10 @@ new #[Layout('layouts.guest')] #[Title('Veterinaria')] class extends Component {
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-10 text-center">
+            <div class="flex justify-center md:flex-row flex-col md:gap-15 gap-10 text-center">
 
                 @if ($profile?->address)
-                    <div class="bg-slate-50 md:p-8 p-4 rounded-2xl border border-gray-100">
+                    <div class="bg-slate-50 md:p-8 p-4 rounded-2xl border border-gray-100 md:w-1/3">
                         <div class="text-3xl mb-4">📍</div>
                         <h3 class="font-bold text-lg mb-2">Dirección</h3>
                         <p class="text-gray-600">
@@ -388,7 +392,7 @@ new #[Layout('layouts.guest')] #[Title('Veterinaria')] class extends Component {
 
 
                 @if ($profile?->phone)
-                    <div class="bg-slate-50 md:p-8 p-4 rounded-2xl border border-gray-100">
+                    <div class="bg-slate-50 md:p-8 p-4 rounded-2xl border border-gray-100 md:w-1/3">
                         <div class="text-3xl mb-4">📞</div>
                         <h3 class="font-bold text-lg mb-2">Teléfono</h3>
                         <p class="text-gray-600">
@@ -399,7 +403,7 @@ new #[Layout('layouts.guest')] #[Title('Veterinaria')] class extends Component {
 
 
                 @if ($profile?->whatsapp)
-                    <div class="bg-slate-50 md:p-8 p-4 rounded-2xl border border-gray-100">
+                    <div class="bg-slate-50 md:p-8 p-4 rounded-2xl border border-gray-100 md:w-1/3">
 
                         <a href="https://wa.me/{{ $profile->whatsapp }}" target="_blank">
                             <div class="text-3xl mb-4 flex justify-center">

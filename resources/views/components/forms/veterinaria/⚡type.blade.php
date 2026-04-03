@@ -33,7 +33,7 @@ new class extends Component {
         if ($this->type) {
             $this->form->update();
         } else {
-            $this->form->store();
+            $this->type = $this->form->store();
         }
 
         if ($this->type->wasRecentlyCreated) {

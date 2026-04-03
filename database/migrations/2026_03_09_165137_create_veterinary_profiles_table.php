@@ -25,6 +25,7 @@ return new class extends Migration
 
             $table->string('logo')->nullable();
             $table->string('cover_image')->nullable();
+            $table->integer('years_in_business')->nullable();
 
             $table->timestamps();
         });

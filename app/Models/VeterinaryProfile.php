@@ -19,6 +19,7 @@ class VeterinaryProfile extends Model
         'whatsapp',
         'logo',
         'cover_image',
+        'years_in_business',
     ];
 
     public function veterinary()

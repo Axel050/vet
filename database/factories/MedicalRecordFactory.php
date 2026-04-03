@@ -10,7 +10,7 @@ use App\Models\VeterinaryType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MedicalRecord>
+ * @extends Factory<MedicalRecord>
  */
 class MedicalRecordFactory extends Factory
 {
@@ -28,7 +28,7 @@ class MedicalRecordFactory extends Factory
             'pet_id' => Pet::factory(),
             'customer_id' => Customer::factory(),
             'veterinary_type_id' => VeterinaryType::factory(),
-            'custom_service_name' => null,
+            'custom_type_name' => null,
             'price' => $this->faker->randomFloat(2, 20, 200),
             'notes' => $this->faker->paragraph(),
             'notes_inside' => $this->faker->paragraph(),

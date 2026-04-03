@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MedicalRecord extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'veterinary_id',
@@ -42,6 +44,17 @@ class MedicalRecord extends Model
         'weight' => 'decimal:2',
     ];
 
+    protected static function booted()
+    {
+        static::deleting(function ($record) {
+            if (! $record->isForceDeleting()) {
+                foreach ($record->files as $file) {
+                    $file->delete();
+                }
+            }
+        });
+    }
+
     public function veterinary()
     {
         return $this->belongsTo(Veterinary::class);
@@ -60,5 +73,10 @@ class MedicalRecord extends Model
     public function type()
     {
         return $this->belongsTo(VeterinaryType::class, 'veterinary_type_id');
+    }
+
+    public function files()
+    {
+        return $this->hasMany(MedicalRecordFile::class);
     }
 }

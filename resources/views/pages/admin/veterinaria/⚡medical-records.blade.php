@@ -346,7 +346,7 @@ new #[Title('Historial Médico')] class extends Component {
                         <td>
                             <p class="text-white font-medium">{{ $record->customer?->name }}</p>
                             <p class="text-xs text-gray-400">{{ $record->pet?->name }} -
-                                {{ $record->pet?->species_name }} - {{ $record->pet?->breed_name }}</p>
+                                {{ $record->pet?->specie_name }} - {{ $record->pet?->breed_name }}</p>
                         </td>
                         <td>
                             <p class="text-white">

@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pet extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'veterinary_id',
@@ -36,6 +38,18 @@ class Pet extends Model
         'is_sterilized' => 'boolean',
         'weight' => 'decimal:2',
     ];
+
+    protected static function booted()
+    {
+        static::deleting(function ($pet) {
+            // Solo en soft delete
+            if (! $pet->isForceDeleting()) {
+                foreach ($pet->medicalRecords as $record) {
+                    $record->delete(); // soft delete
+                }
+            }
+        });
+    }
 
     public function getAgeAttribute()
     {
@@ -75,5 +89,15 @@ class Pet extends Model
     public function medicalRecords()
     {
         return $this->hasMany(MedicalRecord::class);
+    }
+
+    public function getSpecieNameAttribute()
+    {
+        return $this->species->name ?? $this->specie_custom;
+    }
+
+    public function getBreedNameAttribute()
+    {
+        return $this->breed->name ?? $this->breed_custom;
     }
 }

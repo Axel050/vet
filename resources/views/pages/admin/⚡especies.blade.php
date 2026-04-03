@@ -277,7 +277,7 @@ new #[Title('Gestión de Especies')] class extends Component {
                                 <span class="text-white font-semibold">{{ $request->name }}</span>
                             </td>
                             <td>
-                                <span class="text-gray-300">{{ $request->veterinaria?->name }}</span>
+                                <span class="text-gray-300">{{ $request->veterinary?->name }}</span>
                             </td>
                             <td>
                                 <span class="text-gray-300">{{ $request->user?->name }}</span>

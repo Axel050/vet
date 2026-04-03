@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\MedicalRecord;
+use App\Models\MedicalRecordFile;
 use Illuminate\Support\Carbon;
 use Livewire\Form;
 
@@ -54,6 +55,24 @@ class MedicalRecordForm extends Form
 
     public $is_visible_to_owner = true;
 
+    // Attachments
+    public $attachments = [];
+
+    public $attachments_visibility = [];
+
+    // Existing attachments
+    public $existing_attachments = [];
+
+    public function removeAttachment($index): void
+    {
+        if (array_key_exists($index, $this->attachments)) {
+            unset($this->attachments[$index]);
+        }
+        if (array_key_exists($index, $this->attachments_visibility)) {
+            unset($this->attachments_visibility[$index]);
+        }
+    }
+
     public function mount()
     {
         $this->performed_at = Carbon::now()->format('Y-m-d');
@@ -93,6 +112,9 @@ class MedicalRecordForm extends Form
         $this->recommendations = $record->recommendations ?? '';
         $this->next_appointment_at = $record->next_appointment_at?->format('Y-m-d');
         $this->is_visible_to_owner = (bool) $record->is_visible_to_owner;
+
+        // Load existing attachments
+        $this->existing_attachments = $record->files()->get();
     }
 
     public function messages()
@@ -105,11 +127,16 @@ class MedicalRecordForm extends Form
             'custom_type_name.required' => 'El nombre del tipo de consulta personalizado es obligatorio.',
             'price.required' => 'El precio es obligatorio.',
             'performed_at.required' => 'La fecha es obligatoria.',
+            'attachments.max' => 'Solo puedes subir hasta 2 archivos.',
+            'attachments.*.max' => 'Cada archivo no puede superar los 10MB.',
+            'attachments.*.mimes' => 'El archivo debe ser PDF, JPG, JPEG, PNG o WEBP.',
         ];
     }
 
     public function store(): void
     {
+        $this->attachments = array_filter($this->attachments);
+        
         $this->validate([
             'customer_id' => ['required', 'exists:customers,id'],
             'pet_id' => ['required', 'exists:pets,id'],
@@ -140,9 +167,11 @@ class MedicalRecordForm extends Form
             'recommendations' => ['nullable', 'string'],
             'next_appointment_at' => ['nullable', 'date'],
             'is_visible_to_owner' => ['boolean'],
+            'attachments' => ['array', 'max:2'],
+            'attachments.*' => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png,webp', 'max:10240'], // 10MB max per file
         ]);
 
-        MedicalRecord::create([
+        $record = MedicalRecord::create([
             'veterinary_id' => auth()->user()->veterinary_id,
             'customer_id' => $this->customer_id,
             'pet_id' => $this->pet_id,
@@ -167,12 +196,16 @@ class MedicalRecordForm extends Form
             'is_visible_to_owner' => (bool) $this->is_visible_to_owner,
         ]);
 
-        $this->reset(['veterinary_type_id', 'custom_type_name', 'price', 'weight', 'notes', 'notes_inside', 'temperature', 'heart_rate', 'respiratory_rate', 'anamnesis', 'physical_exam_details', 'diagnosis', 'prognosis', 'treatment_plan', 'prescriptions', 'recommendations', 'next_appointment_at', 'is_visible_to_owner']);
+        $this->saveAttachments($record);
+
+        $this->reset(['veterinary_type_id', 'custom_type_name', 'price', 'weight', 'notes', 'notes_inside', 'temperature', 'heart_rate', 'respiratory_rate', 'anamnesis', 'physical_exam_details', 'diagnosis', 'prognosis', 'treatment_plan', 'prescriptions', 'recommendations', 'next_appointment_at', 'is_visible_to_owner', 'attachments', 'attachments_visibility']);
         $this->performed_at = Carbon::now()->format('Y-m-d');
     }
 
     public function update(): void
     {
+        $this->attachments = array_filter($this->attachments);
+
         $this->validate([
             'customer_id' => ['required', 'exists:customers,id'],
             'pet_id' => ['required', 'exists:pets,id'],
@@ -203,6 +236,8 @@ class MedicalRecordForm extends Form
             'recommendations' => ['nullable', 'string'],
             'next_appointment_at' => ['nullable', 'date'],
             'is_visible_to_owner' => ['boolean'],
+            'attachments' => ['array', 'max:2'],
+            'attachments.*' => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png,webp', 'max:10240'],
         ]);
 
         $this->record->update([
@@ -229,6 +264,44 @@ class MedicalRecordForm extends Form
             'is_visible_to_owner' => (bool) $this->is_visible_to_owner,
         ]);
 
-        $this->reset();
+        $this->saveAttachments($this->record);
+
+        // Refresh existing attachments list
+        $this->existing_attachments = $this->record->files()->get();
+        // Reset uploaded files
+        $this->attachments = [];
+        $this->attachments_visibility = [];
+
+        $this->resetErrorBag();
+        $this->resetValidation();
+    }
+
+    protected function saveAttachments(MedicalRecord $record)
+    {
+        if (! empty($this->attachments)) {
+            foreach ($this->attachments as $index => $file) {
+
+                if (! $file) {
+                    continue;
+                }
+
+                // Determine file type category based on extension
+                $extension = strtolower($file->getClientOriginalExtension());
+                $type = in_array($extension, ['jpg', 'jpeg', 'png', 'webp', 'gif']) ? 'image' : 'document';
+
+                $path = $file->store('medical-records/'.$record->id, 'public');
+
+                $isVisible = isset($this->attachments_visibility[$index]) ? (bool) $this->attachments_visibility[$index] : false;
+
+                MedicalRecordFile::create([
+                    'medical_record_id' => $record->id,
+                    'file_path' => $path,
+                    'file_name' => $file->hashName(),
+                    'original_name' => $file->getClientOriginalName(),
+                    'type' => $type,
+                    'is_visible_to_owner' => $isVisible,
+                ]);
+            }
+        }
     }
 }

@@ -296,11 +296,11 @@ new #[Title('Gestión de Razas')] class extends Component {
                             </td>
                             <td>
                                 <span class="px-2 py-1 bg-indigo-500/10 text-indigo-400 rounded text-xs">
-                                    {{ $request->species?->name ?? 'N/A' }}
+                                    {{ $request->specie_name }}
                                 </span>
                             </td>
                             <td>
-                                <div class="text-sm text-gray-300">{{ $request->veterinaria?->name }}</div>
+                                <div class="text-sm text-gray-300">{{ $request->veterinary?->name }}</div>
                                 <div class="text-xs text-gray-500">{{ $request->user?->name }} •
                                     {{ $request->created_at->format('d/m/Y') }}</div>
                             </td>
@@ -334,7 +334,7 @@ new #[Title('Gestión de Razas')] class extends Component {
             </table>
         </div>
     @endif
-    v>
+
     <x-confirmation-modal wire:model="confirmingRazaDeletion" action="deleteRaza">
         <x-slot name="title">
             Eliminar Raza
