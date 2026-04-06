@@ -33,7 +33,7 @@ new #[Title('Historial Médico')] class extends Component {
 
     public function mount()
     {
-        $this->isPro = Auth::user()->veterinary->plan === 'pro';
+        $this->isPro = Auth::user()->veterinary->plan === 'pro' || Auth::user()->veterinary->plan === 'free';
 
         $this->fromDate = now()->subDays(30)->toDateString();
         $this->toDate = now()->toDateString();

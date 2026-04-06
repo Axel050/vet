@@ -15,4 +15,13 @@ class Species extends Model
     {
         return $this->hasMany(Breed::class);
     }
+
+
+
+    public function pets()
+    {
+        return $this->hasMany(Pet::class);
+    }
+
+    
 }

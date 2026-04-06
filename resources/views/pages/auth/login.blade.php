@@ -9,19 +9,16 @@
         <form method="POST" action="{{ route('login.store') }}" class="flex flex-col gap-6">
             @csrf
 
+
             <!-- Email Address -->
 
             <div>
-                <label class="block text-sm font-medium text-gray-600 mb-1 ">
-                    Correo electrónico
-                </label>
-                <input type="email" wire:model="email" placeholder="email@example.com" name="email"
-                    value="{{ old('email') }}" autocomplete="email"
-                    class="w-full px-2 md:px-4 py-1 md:py-1.5 bg-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-800 text-gray-700 placeholder-gray-500" />
-
-
+                <label for="email" class="block text-sm font-medium text-gray-700 ">{{ __('Email') }}</label>
+                <input id="email" type="email" name="email" value="{{ request('email') }}" required
+                    autocomplete="email"
+                    class="mt-1 block w-full border border-gray-500 rounded-xl  text-gray-800 dark:text-gray-100 placeholder-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-gray-500" />
                 @error('email')
-                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -30,12 +27,9 @@
             <!-- Password -->
             <div class="relative">
                 <div>
-                    <label class="block text-sm font-medium text-gray-600 mb-1 ">
-                        Contraseña
-                    </label>
-                    <input type="password" wire:model="password" placeholder="Contraseña" name="password"
-                        value="{{ old('password') }}"
-                        class="w-full px-2 md:px-4 py-1 md:py-1.5 bg-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-800 text-gray-700 placeholder-gray-500" />
+                    <label for="password" class="block text-sm font-medium text-gray-700 ">{{ __('Password') }}</label>
+                    <input id="password" type="password" name="password" required autocomplete="current-password"
+                        class="mt-1 block w-full border border-gray-500 rounded-xl  text-gray-800 dark:text-gray-100 placeholder-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-gray-500" />
 
 
                     @error('password')

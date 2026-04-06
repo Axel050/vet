@@ -22,8 +22,7 @@ new #[Title('Editor de Perfil')] class extends Component {
     {
         $veterinary = auth()->user()->veterinary;
 
-        // Security check: Only PRO plan users
-        if ($veterinary->plan !== 'pro') {
+        if ($veterinary->plan !== 'pro' && $veterinary->plan !== 'free') {
             abort(403, 'Esta función solo está disponible para el Plan PRO.');
         }
 
@@ -163,7 +162,7 @@ new #[Title('Editor de Perfil')] class extends Component {
                             <div class="flex flex-col gap-2">
                                 <input type="file" wire:model="form.cover_image"
                                     class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-gray-700 file:text-gray-300 hover:file:bg-gray-600 cursor-pointer">
-                                
+
                                 @if ($form->cover_image || $form->profile?->cover_image)
                                     <button type="button" wire:click="removeCoverImage"
                                         class="text-xs text-red-500 hover:text-red-400 font-medium text-left w-fit">
@@ -226,7 +225,8 @@ new #[Title('Editor de Perfil')] class extends Component {
                         @endif
                         <div class="flex flex-col gap-2">
                             <div>
-                                <label class="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">Logo
+                                <label
+                                    class="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">Logo
                                     de la Veterinaria</label>
                                 <input type="file" wire:model="form.logo"
                                     class="text-xs text-gray-400 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-gray-700 file:text-gray-300 hover:file:bg-gray-600 cursor-pointer">

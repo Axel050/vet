@@ -58,6 +58,24 @@
         opacity: 0;
         position: absolute;
     }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active,
+    input:autofill,
+    input:autofill:hover,
+    input:autofill:focus {
+        -webkit-text-fill-color: inherit;
+        /* mantiene el color de texto que vos elegiste */
+        -webkit-box-shadow: 0 0 0 1000px rgb(0 0 0 / 0) inset;
+        /* fondo transparente */
+        box-shadow: 0 0 0 1000px rgb(0 0 0 / 0) inset;
+        background-color: transparent !important;
+        transition: background-color 5000s ease-in-out 0s;
+        /* truco para que no vuelva a amarillo */
+    }
+
 }
 
 

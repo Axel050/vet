@@ -2,7 +2,11 @@
     <div class="flex flex-col gap-8">
 
         <!-- Header -->
-        <x-auth-header :title="__('Recuperar contraseña')" :description="__('Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña')" />
+        <div class="flex w-full flex-col text-center">
+            <h1 class="text-2xl font-semibold text-gray-800">{{ __('Recuperar contraseña') }}</h1>
+            <p class="text-gray-500 mt-1">
+                {{ __('Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña') }}</p>
+        </div>
 
         <!-- Session Status -->
         <x-auth-session-status class="text-center text-green-400 font-medium" :status="session('status')" />
@@ -11,19 +15,28 @@
             @csrf
 
             <!-- Email -->
-            <x-input :label="__('Correo electrónico')" model="email" type="email" name="email" required autofocus autocomplete="email"
-                placeholder="email@example.com" value="{{ old('email') }}" />
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 ">{{ __('Email') }}</label>
+                <input id="email" type="email" name="email" value="{{ request('email') }}" required
+                    autocomplete="email"
+                    class="mt-1 block w-full border border-gray-500 rounded-xl  text-gray-800 dark:text-gray-100 placeholder-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-gray-500" />
+                @error('email')
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
 
             <!-- Submit Button -->
             <button type="submit"
                 class="relative w-full py-3 rounded-xl 
-                       bg-gradient-to-r from-blue-600 to-indigo-600
-                       text-white font-semibold
-                       shadow-lg shadow-blue-900/40
-                       hover:shadow-blue-700/50
-                       hover:scale-[1.01]
-                       active:scale-[0.99]
-                       transition-all duration-300"
+                            bg-linear-to-r from-emerald-400 via-emerald-600 to-emerald-600           
+                            bg-size-[200%_100%]
+                            hover:bg-right
+                            transition-all duration-500
+                            text-white font-semibold tracking-wide
+                            shadow-lg shadow-emerald-900/40
+                            hover:shadow-blue-700/50
+                            active:scale-[0.98]
+                            focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                 data-test="email-password-reset-link-button">
                 Enviar enlace de recuperación
             </button>

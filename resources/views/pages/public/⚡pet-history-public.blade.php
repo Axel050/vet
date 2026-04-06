@@ -12,6 +12,7 @@ new #[Layout('layouts.guest')] #[Title('Historial de Mascota')] class extends Co
     public $veterinary;
     public $logo;
     public $isCancelled = false;
+    public $isPro = false;
 
     public function mount(Veterinary $veterinary, Pet $pet, $token)
     {
@@ -21,7 +22,9 @@ new #[Layout('layouts.guest')] #[Title('Historial de Mascota')] class extends Co
 
         $this->veterinary = $veterinary;
 
-        if ($veterinary->plan === 'pro') {
+        $this->isPro = $veterinary->plan === 'pro' || $veterinary->plan === 'free';
+
+        if ($this->isPro) {
             $this->logo = $veterinary->profile?->logo;
             if (!$this->logo) {
                 $this->logo = asset('assets/logo.png');
@@ -288,16 +291,20 @@ new #[Layout('layouts.guest')] #[Title('Historial de Mascota')] class extends Co
                         </div>
                         Cronograma de Atenciones
                     </h3>
-                    <div class="no-print">
-                        <button onclick="window.print()"
-                            class="text-stone-400 hover:text-teal-600 transition-colors p-2 rounded-xl hover:bg-teal-50">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 002 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
-                                </path>
-                            </svg>
-                        </button>
-                    </div>
+
+                    @if ($isPro)
+                        <div class="no-print">
+                            <button onclick="window.print()"
+                                class="text-stone-400 hover:text-teal-600 transition-colors p-2 rounded-xl bg-teal-50 hover:bg-teal-100 flex border border-teal-100">
+                                <svg class="size-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 002 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
+                                    </path>
+                                </svg>
+                                PDF
+                            </button>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="md:space-y-4 space-y-2 relative">

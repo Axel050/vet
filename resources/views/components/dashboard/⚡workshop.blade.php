@@ -20,7 +20,7 @@ new class extends Component {
             $user->veterinary->syncSubscriptionStatus();
         }
 
-        $this->isPro = Auth::user()->veterinary->plan === 'pro';
+        $this->isPro = Auth::user()->veterinary->plan === 'pro' || Auth::user()->veterinary->plan === 'free';
 
         $this->resolveDates();
     }

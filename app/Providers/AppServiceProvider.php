@@ -5,11 +5,16 @@ namespace App\Providers;
 use App\Enums\SubscriptionStatus;
 use App\Models\User;
 use Carbon\CarbonImmutable;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Symfony\Component\Mailer\Bridge\Brevo\Transport\BrevoTransportFactory;
+use Symfony\Component\Mailer\Transport\Dsn;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,9 +31,33 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        Mail::extend('brevo', function (array $config) {
+            return (new BrevoTransportFactory)->create(
+                new Dsn(
+                    'brevo+api',
+                    'default',
+                    config('services.brevo.key')
+                )
+            );
+        });
+
         $this->configureDefaults();
         $this->registerGates();
 
+        ResetPassword::toMailUsing(function (object $notifiable, string $token) {
+            $url = url(route('password.reset', [
+                'token' => $token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ], false));
+
+            return (new MailMessage)
+                ->subject('Restablecer tu contraseña de '.config('app.name'))
+                ->view('emails.password-reset', [
+                    'url' => $url,
+                    'user' => $notifiable,
+                ]);
+        });
     }
 
     /**
@@ -60,7 +89,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('pro-veterinaria', function (User $user) {
-            return $user->veterinary?->plan === 'pro';
+            return $user->veterinary?->plan === 'pro' || $user->veterinary?->plan === 'free';
         });
 
         Gate::define('active-veterinaria', function (User $user) {
