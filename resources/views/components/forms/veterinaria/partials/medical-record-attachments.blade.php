@@ -83,7 +83,8 @@
                 La subida de archivos adjuntos (radiografías, análisis, fotos, etc.) está reservada
                 exclusivamente para veterinarias con suscripción PRO.
             </p>
-            <a href=""
+            <a href="https://wa.me/5491162841353?text=Hola%20quiero%20mejorar%20el%20plan%20de%20mi%20veterinaria"
+                target="_blank"
                 class="inline-flex items-center justify-center rounded-lg bg-emerald-600 px-4 md:py-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 transition duration-200">
                 Mejorar a PRO
             </a>

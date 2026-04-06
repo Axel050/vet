@@ -440,7 +440,7 @@ new class extends Component {
                                             <p class="text-indigo-400 font-bold text-sm">
                                                 ${{ number_format($record->price, 0, ',', '.') }}</p>
                                             <p class="text-gray-500 text-[10px] mt-0.5">
-                                                {{ $record->performed_at->format('d/m/y') }}</p>
+                                                {{ $record->performed_at?->format('d/m/y') }}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -498,13 +498,13 @@ new class extends Component {
                         @if ($veterinary->plan == 'free' && $veterinary->trial_ends_at)
                             <div class="flex justify-between items-center text-sm">
                                 <span class="text-gray-400">Prueba termina</span>
-                                <span class="text-white">{{ $veterinary->trial_ends_at->format('d/m/Y') }}</span>
+                                <span class="text-white">{{ $veterinary->trial_ends_at?->format('d/m/Y') }}</span>
                             </div>
                         @elseif(auth()->user()->veterinary->plan == 'basic' || auth()->user()->veterinary->plan == 'pro')
                             <div class="flex justify-between items-center text-sm">
                                 <span class="text-gray-400">Subscripción finaliza</span>
                                 <span
-                                    class="text-white">{{ $veterinary->subscription_ends_at->format('d/m/Y') }}</span>
+                                    class="text-white">{{ $veterinary->subscription_ends_at?->format('d/m/Y') }}</span>
                             </div>
                         @endif
 
@@ -513,10 +513,12 @@ new class extends Component {
 
                 <div class="mt-8">
                     <p class="text-xs text-gray-500 text-center mb-4">¿Necesitas más funciones?</p>
-                    <button
-                        class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl transition-colors text-sm">
+                    <a href="https://wa.me/5491162841353?text=Hola%20quiero%20mejorar%20el%20plan%20de%20mi%20veterinaria"
+                        target="_blank"
+                        class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl
+                        transition-colors text-sm">
                         Mejorar Plan
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
