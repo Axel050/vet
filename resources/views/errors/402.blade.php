@@ -41,7 +41,7 @@
                 Ir al Dashboard
             </a>
 
-            <a href="mailto:soporte@cumbreit.com.ar"
+            <a href="https://wa.me/5491162841353?text=Hola%20quiero%20activar%20la%20suscripcion%20de%20mi%20veterinaria"
                 class="block w-full md:py-4 py-1.5 md:px-6 px-4 bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium rounded-xl transition-all border border-gray-700">
                 Contactar Soporte
             </a>

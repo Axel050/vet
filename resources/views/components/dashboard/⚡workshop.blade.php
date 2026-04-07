@@ -511,15 +511,17 @@ new class extends Component {
                     </div>
                 </div>
 
-                <div class="mt-8">
-                    <p class="text-xs text-gray-500 text-center mb-4">¿Necesitas más funciones?</p>
-                    <a href="https://wa.me/5491162841353?text=Hola%20quiero%20mejorar%20el%20plan%20de%20mi%20veterinaria"
-                        target="_blank"
-                        class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl
-                        transition-colors text-sm">
-                        Mejorar Plan
-                    </a>
-                </div>
+                @if ($veterinary->plan == 'free' || $veterinary->plan == 'basic')
+                    <div class="mt-8 w-full">
+                        <p class="text-xs text-gray-500 text-center mb-4">¿Necesitas más funciones?</p>
+                        <a href="https://wa.me/5491162841353?text=Hola%20quiero%20mejorar%20el%20plan%20de%20mi%20veterinaria"
+                            target="_blank"
+                            class=" md:px-6 md:py-2  w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl text-center
+                        transition-colors text-sm flex justify-center">
+                            Mejorar Plan
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
     @endif
