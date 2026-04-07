@@ -130,9 +130,9 @@
                 </div>
 
                 <!-- User Menu -->
-                <div class="flex-shrink-0 flex flex-col border-t border-gray-800 p-4 bg-gray-950 overflow-x-hidden">
+                <div class="shrink-0 flex flex-col border-t border-gray-800 p-4 bg-gray-950 overflow-x-hidden">
                     <div class="flex items-center w-full">
-                        <div class="flex-shrink-0">
+                        <div class="shrink-0">
                             <div
                                 class="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-semibold">
                                 {{ substr(auth()->user()->name, 0, 2) }}
