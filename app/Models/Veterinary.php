@@ -106,7 +106,7 @@ class Veterinary extends Model
         }
 
         if (in_array($this->subscription_status, [SubscriptionStatus::ACTIVE, SubscriptionStatus::PAST_DUE]) && $this->subscription_ends_at?->isPast()) {
-            $daysPast = $this->subscription_ends_at->diffInDays(now(), false);
+            $daysPast = $this->subscription_ends_at?->diffInDays(now(), false);
             if ($daysPast > 7) {
                 $this->update(['subscription_status' => SubscriptionStatus::SUSPENDED]);
             } else {
@@ -116,9 +116,9 @@ class Veterinary extends Model
 
         if ($this->subscription_status === SubscriptionStatus::SUSPENDED) {
             if ($this->plan === 'free') {
-                $daysPast = $this->trial_ends_at->diffInDays(now(), false);
+                $daysPast = $this->trial_ends_at?->diffInDays(now(), false);
             } else {
-                $daysPast = $this->subscription_ends_at->diffInDays(now(), false);
+                $daysPast = $this->subscription_ends_at?->diffInDays(now(), false);
             }
             if ($daysPast > 20) {
                 $this->update(['subscription_status' => SubscriptionStatus::CANCELLED]);
@@ -138,18 +138,11 @@ class Veterinary extends Model
     public function daysLeft(): ?int
     {
         if ($this->subscription_ends_at && $this->subscription_status === SubscriptionStatus::ACTIVE) {
-            // info('OKOKOK');
-            // info($this->subscription_ends_at);
-            // info(now());
-            // info('NOWWWWWWW ');
-
-            // info($this->subscription_ends_at->diffInDays(now(), false));
 
             return now()->diffInDays($this->subscription_ends_at, false);
         }
 
         if ($this->trial_ends_at && $this->subscription_status === SubscriptionStatus::TRIAL) {
-            // info('TRIEALLLLL');
 
             return now()->diffInDays($this->trial_ends_at, false);
         }
